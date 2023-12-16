@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Buttons</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        /* Button Colors */
+        .button.one { background-color: #e74c3c; } /* 紅色 */
+        .button.two { background-color: #f39c12; } /* 黃色 */
+        .button.three { background-color: #3498db; } /* 藍色 */
+        .button.four { background-color: #2ecc71; } /* 綠色 */
+        .button.five { background-color: #808080; } /* 灰色 */
+
+        /* Hover Effect */
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        /* 將 Interactive Buttons 置中 */
+        .button-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Display Result */
+        #comparison-result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Declare userInput1 and userInput2 in the global scope
+        var userInput1, userInput2;
+
+        window.onload = function() {
+            // 提示使用者輸入第一次數字
+            userInput1 = window.prompt('Please enter a number:', '');
+
+            // 如果使用者按下 "OK"，再提示輸入第二次數字
+            if (userInput1 !== null && userInput1 !== '') {
+                userInput2 = window.prompt('Please enter another number:', '');
+
+                // 如果使用者按下 "OK"，進行比較
+                if (userInput2 !== null && userInput2 !== '') {
+                    // 將輸入轉換為整數
+                    var num1 = parseInt(userInput1);
+                    var num2 = parseInt(userInput2);
+
+                    // 比較並根據條件執行相應的操作
+                    if (num1 > num2) {
+                        changeBackgroundColor('lightblue');
+                        displayComparisonResult(userInput1 + ' > ' + userInput2);
+                    } else if (num2 > num1) {
+                        changeBackgroundColor('orange');
+                        displayComparisonResult(userInput2 + ' > ' + userInput1);
+                    } else {
+                        changeBackgroundColor('lightyellow');
+                        displayComparisonResult(userInput2 + ' == ' + userInput1);
+                    }
+                }
+            }
+        }
+
+        function displayComparisonResult(result) {
+            var resultElement = document.getElementById('comparison-result');
+            resultElement.textContent = result;
+        }
+
+        function showAlert(userInput) {
+            alert(userInput);
+        }
+    </script>
+
+    <div class="button-title">
+        <h1>Interactive Buttons</h1>
+    </div>
+    <div class="button-container">
+        <button class="button one" onclick="showAlert(userInput1)">Button 1</button>
+        <button class="button two" onclick="showAlert(userInput2)">Button 2</button>
+        <button class="button three" onclick="changeBackgroundColor('#3498db')">Blue</button>
+        <button class="button four" onclick="changeBackgroundColor('#2ecc71')">Green</button>
+        <button class="button five" onclick="changeBackgroundColor('#ffffff')">Reset BG color</button>
+    </div>
+
+    <!-- Display Result -->
+    <div id="comparison-result"></div>
+
+    <script>
+        function changeBackgroundColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+
+    </script>
+
+</body>
+</html>
